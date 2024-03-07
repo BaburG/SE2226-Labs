@@ -12,7 +12,7 @@ public class RepeatingDigits implements Rule {
         char secondDigit = password.charAt(1);
         char thirdDigit = password.charAt(2);
         char fourthDigit = password.charAt(3);
-        return !((firstDigit == secondDigit) && (secondDigit == thirdDigit) && (thirdDigit == fourthDigit));
+        return !((firstDigit == thirdDigit) && (secondDigit == fourthDigit)); // Fixed
     }
 
     @Override

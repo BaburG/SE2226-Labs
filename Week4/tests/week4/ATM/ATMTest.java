@@ -182,7 +182,7 @@ class ATMTest {
 
     @DisplayName("Test 2 digits repeating passwords")
     @Test
-    void twoDigitRepeatingPasswordTest(){ //Fails for 1010
+    void twoDigitRepeatingPasswordTest(){ //Pass
         for (int i = 10; i < 100; i++){
             int previousPasswordsSize = aaa.getPasswords().size();
             //Test password
