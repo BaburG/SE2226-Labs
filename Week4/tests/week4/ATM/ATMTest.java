@@ -103,8 +103,8 @@ class ATMTest {
     void changePassword() {
         assertEquals("4512", aaa.getPassword());
         System.out.println(aaa.getPassword());
-        atm.changePassword(aaa,"1245");
+        atm.changePassword(aaa,"7945");
         System.out.println(aaa.getPassword());
-        assertTrue("1245".equals(aaa.getPassword())); ///NULL pointer????????
+        assertTrue("7945".equals(aaa.getPassword())); ///NULL pointer????????
     }
 }

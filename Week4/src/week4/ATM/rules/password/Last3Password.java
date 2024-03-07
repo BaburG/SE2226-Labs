@@ -14,7 +14,7 @@ public class Last3Password implements Rule {
         CircularQueue<String> passwords = customer.getPasswords();
         for (int i = 0; i < passwords.size(); i++) {
             customerPassword = passwords.get(i);
-            if (customerPassword.equals(password)) {
+            if (customerPassword != null && customerPassword.equals(password)) { // Fix
                 inLastTree = true;
                 break;
             }

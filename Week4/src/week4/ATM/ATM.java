@@ -91,6 +91,7 @@ public class ATM {
         if (success) {
             double balance = receiver.getBalance();
             receiver.setBalance(balance + amount);
+            sender.setBalance(balance-amount); //Fixed
             System.out.println(messages[2] + receiver.getName());
         }
     }

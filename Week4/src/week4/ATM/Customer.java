@@ -14,6 +14,7 @@ public class Customer {
         this.name = name;
         this.balance = balance;
         passwords = new CircularQueue<>(3);
+        passwords.add(password); //Fixed
     }
 
     public String getName() {
@@ -37,6 +38,7 @@ public class Customer {
     }
 
     public void setPassword(String password) {
+        passwords.add(password); //Fixed
         this.password = password;
     }
 
