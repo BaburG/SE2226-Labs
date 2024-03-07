@@ -99,12 +99,102 @@ class ATMTest {
         assertEquals(INITIAL+2000, bbb.getBalance());
     }
 
+    @DisplayName("Negative Transfer Test")
+    @Test
+    void negativeTransferToCustomer() {            ///NOT working
+        assertEquals(INITIAL, aaa.getBalance());
+        assertEquals(INITIAL, bbb.getBalance());
+        atm.transferToCustomer(aaa,bbb,-2000);
+        assertEquals(INITIAL, aaa.getBalance());
+        assertEquals(INITIAL, bbb.getBalance());
+    }
+
+    @DisplayName("Zero Transfer Test")
+    @Test
+    void zeroTransferToCustomer() {            ///NOT working
+        assertEquals(INITIAL, aaa.getBalance());
+        assertEquals(INITIAL, bbb.getBalance());
+        atm.transferToCustomer(aaa,bbb,0);
+        assertEquals(INITIAL, aaa.getBalance());
+        assertEquals(INITIAL, bbb.getBalance());
+    }
+
+    @DisplayName("Change password Test")
     @Test
     void changePassword() {
         assertEquals("4512", aaa.getPassword());
-        System.out.println(aaa.getPassword());
         atm.changePassword(aaa,"7945");
-        System.out.println(aaa.getPassword());
-        assertTrue("7945".equals(aaa.getPassword())); ///NULL pointer????????
+        assertTrue("7945".equals(aaa.getPassword()));
     }
+
+    @DisplayName("3 digit password Test")
+    @Test
+    void shortPasswordTest(){
+        int previousPasswordsSize = aaa.getPasswords().size();
+        //Test short password
+        assertEquals("4512",aaa.getPassword());
+        atm.changePassword(aaa,"159");
+        assertEquals("4512",aaa.getPassword());
+        //check it is not added to previous passwords
+        assertEquals(previousPasswordsSize, aaa.getPasswords().size());
+    }
+
+    @DisplayName("Long Password Test")
+    @Test
+    void longPasswordTest(){
+        int previousPasswordsSize = aaa.getPasswords().size();
+        //Test long password
+        assertEquals("4512",aaa.getPassword());
+        atm.changePassword(aaa,"15928");
+        assertEquals("4512",aaa.getPassword());
+        //check it is not added to previous passwords
+        assertEquals(previousPasswordsSize, aaa.getPasswords().size());
+    }
+
+
+    @DisplayName("Test passwords between 1900 and 2000")
+    @Test
+    void yearPasswordTest(){
+        for (int i = 0; i <= 100; i++){
+            int previousPasswordsSize = aaa.getPasswords().size();
+            //Test password
+            assertEquals("4512",aaa.getPassword());
+            atm.changePassword(aaa,String.valueOf(1900+i));
+            assertEquals("4512",aaa.getPassword());
+            //check it is not added to previous passwords
+            assertEquals(previousPasswordsSize, aaa.getPasswords().size());
+        }
+    }
+
+    @DisplayName("Test repeating number passwords")
+    @Test
+    void reaptingNumberPasswordTest(){
+        for (int i = 0; i < 10; i++){
+            int previousPasswordsSize = aaa.getPasswords().size();
+            //Test password
+            assertEquals("4512",aaa.getPassword());
+            atm.changePassword(aaa,String.valueOf(i+i*10+i*100+i*1000));
+            assertEquals("4512",aaa.getPassword());
+            //check it is not added to previous passwords
+            assertEquals(previousPasswordsSize, aaa.getPasswords().size());
+        }
+    }
+
+    @DisplayName("Test 2 digits repeating passwords")
+    @Test
+    void twoDigitRepeatingPasswordTest(){ //Fails for 1010
+        for (int i = 10; i < 100; i++){
+            int previousPasswordsSize = aaa.getPasswords().size();
+            //Test password
+            assertEquals("4512",aaa.getPassword());
+            atm.changePassword(aaa,String.valueOf(i+i*100));
+            assertEquals("4512",aaa.getPassword());
+            //check it is not added to previous passwords
+            assertEquals(previousPasswordsSize, aaa.getPasswords().size());
+        }
+    }
+
+
+
+
 }
