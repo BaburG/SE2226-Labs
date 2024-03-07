@@ -1,9 +1,8 @@
 package week4.ATM;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -195,6 +194,33 @@ class ATMTest {
     }
 
 
+    @DisplayName("Non Numeric Password Test")
+    @ParameterizedTest
+    @ValueSource(strings  = {"akgk", "@$*@", "1h* "})
+    void nonNumericPasswordTest(String password){
+        int previousPasswordsSize = aaa.getPasswords().size();
+        //Test long password
+        assertEquals("4512",aaa.getPassword());
+        atm.changePassword(aaa,password);
+        assertEquals("4512",aaa.getPassword());
+        //check it is not added to previous passwords
+        assertEquals(previousPasswordsSize, aaa.getPasswords().size());
+    }
 
-
+    @DisplayName("Repeating Password Test")
+    @Test
+    void reapeatedPasswordTest(){
+        int previousPasswordsSize = aaa.getPasswords().size();
+        String passwords[]  = {"9021", "8493", "4512"};
+        for (String password : passwords) {
+            atm.changePassword(aaa, password);
+            if (!password.equals("4512")) {
+                assertTrue(password.equals(aaa.getPassword()));
+                assertEquals(previousPasswordsSize == 3 ? 3 : previousPasswordsSize + 1, aaa.getPasswords().size());
+            } else { //fail if in last three
+                assertTrue(aaa.getPassword().compareTo("8493") == 0);
+                assertEquals(3, aaa.getPasswords().size());
+            }
+        }
+    }
 }

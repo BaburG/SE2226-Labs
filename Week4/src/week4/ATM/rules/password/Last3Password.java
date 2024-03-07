@@ -8,18 +8,16 @@ public class Last3Password implements Rule {
     @Override
     public boolean validate(Customer customer, Object input) {
         assert input instanceof String : "Input must be a string";
-        String password = (String) input;
-        boolean inLastTree = false;
+        String password = (String) input; //Clean up
         String customerPassword;
         CircularQueue<String> passwords = customer.getPasswords();
         for (int i = 0; i < passwords.size(); i++) {
             customerPassword = passwords.get(i);
             if (customerPassword != null && customerPassword.equals(password)) { // Fix
-                inLastTree = true;
-                break;
+                return false;
             }
         }
-        return !inLastTree;
+        return true;
     }
 
     @Override

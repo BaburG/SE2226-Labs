@@ -101,13 +101,10 @@ public class ATM {
         for (Rule rule : passwordRules) {
             if (!rule.validate(customer, password)) {
                 System.out.println(rule.message());
-                success = false;
-                break;
+                return;
             }
         }
-        if (success) {
-            customer.setPassword(password);
-            System.out.println(messages[3]);
-        }
+        customer.setPassword(password);
+        System.out.println(messages[3]);
     }
 }
