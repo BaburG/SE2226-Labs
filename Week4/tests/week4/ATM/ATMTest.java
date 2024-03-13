@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ATMTest {
+public class ATMTest {
     static ATM atm;
     static Customer aaa;
     static Customer bbb;
