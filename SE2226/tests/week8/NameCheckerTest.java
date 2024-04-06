@@ -27,6 +27,7 @@ public class NameCheckerTest {
     @ParameterizedTest
     @MethodSource("stringList")
     void checkNames(String name) {
+
         assertTrue(NameChecker.check(name));
     }
 

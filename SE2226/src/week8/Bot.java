@@ -72,7 +72,8 @@ public class Bot {
         WebElement parentDiv = wait.until(driver -> driver.findElement(By.cssSelector(listParentClassName)));
         List<WebElement> movies = wait.until(driver -> parentDiv.findElements(By.tagName("li")));
         for (WebElement movie : movies) {
-            String movieName = movie.findElement(By.cssSelector(movieTitleClass)).getText();
+            int startIndex = movie.findElement(By.cssSelector(movieTitleClass)).getText().indexOf(" ");
+            String movieName = movie.findElement(By.cssSelector(movieTitleClass)).getText().substring(startIndex).trim();
             movieNames.add(movieName);
         }
     }
