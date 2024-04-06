@@ -19,6 +19,7 @@ public class NameCheckerTest {
     @DisplayName("Get Data")
     static void getData() {
         Bot selenium = new Bot(URL);
+        selenium.run();
         movie_list = selenium.getMovieNames();
         System.out.println(movie_list.size() + " movie information collected");
     }
