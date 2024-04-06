@@ -14,6 +14,9 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Bot.
+ */
 public class Bot {
 
     private WebDriver driver;
@@ -21,9 +24,16 @@ public class Bot {
     private final int TIMEOUT = 5;
     private WebDriverWait wait;
 
+
+
     private Actions actionProvider;
     private ArrayList<String> movieNames;
 
+    /**
+     * Instantiates a new Bot.
+     *
+     * @param url the url
+     */
     public Bot(String url) {
         movieNames = new ArrayList<>();
         if (validateUrl(url)) {
@@ -95,7 +105,7 @@ public class Bot {
     private void initializeDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--whitelisted-ips=''");
-        options.addArguments("--start-maximized");
+        options.addArguments("--window-size=1920,1080");
         driver = new ChromeDriver(options);
     }
 
@@ -106,6 +116,10 @@ public class Bot {
     private void quit() {
         actionProvider.pause(Duration.ofSeconds(TIMEOUT)).build().perform();
         driver.quit();
+    }
+
+    public ArrayList<String> getMovieNames() {
+        return movieNames;
     }
 
 
